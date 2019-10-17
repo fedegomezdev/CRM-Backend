@@ -39,7 +39,9 @@ module.exports = function(){
 
     router.get('/pedidos/:idPedido', pedidosController.mostrarPedido);
 
-    router.put('/pedidos/:idPediddo', pedidosController.actualizarPedido);
+    router.put('/pedidos/:idPedido', pedidosController.actualizarPedido);
+
+    router.delete('/pedidos/:idPedido', pedidosController.eliminarPedido);
 
     return router;
 }

@@ -49,7 +49,14 @@ exports.mostrarPedido = async(req, res, next) => {
 //actualizar un pedido
 exports.actualizarPedido = async(req,res,next) => {
     try{
-        let pedido = await Pedidos.findByIdAndUpdate(req.params.idPedido, req.body);
+
+        let pedido = await Pedidos.findByIdAndUpdate(req.params.idPedido, req.body)
+        .populate('cliente')
+        .populate({
+            path: 'pedido.producto', //donde se encuentra ese producto en nuestra referencia
+            model: 'Productos' //referencia al modelo
+        });
+
         res.json(pedido);
         
     } catch(error) {
@@ -57,3 +64,14 @@ exports.actualizarPedido = async(req,res,next) => {
         next();
     }
 }    
+
+//eliminar pedido por id
+exports.eliminarPedido = async(req,res,next) => {
+    try{
+        await Pedidos.findByIdAndDelete(req.params.idPedido);
+        res.json({mensaje:"pedido eliminado"});
+    } catch(error) {
+        console.log(error);
+        next();
+    }
+}
