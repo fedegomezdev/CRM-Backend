@@ -2,13 +2,7 @@ const Clientes = require('../models/Clientes');
 
 exports.nuevoCliente = async (req,res, next) => {
     const { nombre, apellido, empresa, telefono, email } = req.body;
-    const cliente = new Clientes({
-        nombre,
-        apellido,
-        empresa,
-        telefono,
-        email
-    });
+    const cliente = new Clientes(req.body);
 
     try{
         await cliente.save();

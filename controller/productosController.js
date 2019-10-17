@@ -43,7 +43,7 @@ exports.subirArchivo = (req, res, next) => {
 
 //agregar productos
 exports.nuevoProducto = async(req, res, next) => {
-    const producto = new Productos (req.body);
+    const producto = new Productos(req.body);
 
     try{
         if(req.file.filename){ //si hay algun archivo
@@ -64,6 +64,56 @@ exports.mostrarProductos = async(req,res,next)=> {
         const productos = await Productos.find();
         res.json(productos);
     }catch(error){
+        console.log(error);
+        next();
+    }
+}
+
+
+//mostrar un producto
+exports.mostrarProducto = async (req, res, next) => {
+    const producto = await Productos.findById(req.params.idProducto);
+
+    if(!producto) {
+        res.json({mensaje: "producto inexistente"});
+        return next();
+    }
+    res.json(producto);
+}
+
+//actualizar un producto por id
+exports.actualizarProducto = async(req,res,next) => {
+    try{
+
+        let productoAnterior = await Productos.findById(req.params.idProducto);
+
+        //construir un nuevo producto
+        let nuevoProducto = req.body;
+
+        //verificar si hay imagen nueva
+        if(req.file) {
+            nuevoProducto.imagen = req.file.filename;
+        }else {
+            nuevoProducto.imagen = productoAnterior.imagen;
+        }
+
+        let producto = await Productos.findByIdAndUpdate(req.params.idProducto ,
+           nuevoProducto ,{
+               new: true
+           } );
+        res.json(producto);
+    }catch(error){
+        console.log(error);
+        next();
+    }
+}
+
+//elimina un producto por id
+exports.eliminarProducto = async(req, res, next) => {
+    try {
+        await Productos.findByIdAndDelete(req.params.idProducto);
+        res.json({mensaje:"producto eliminado"});
+    }catch (error){
         console.log(error);
         next();
     }
