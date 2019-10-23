@@ -8,7 +8,7 @@ exports.nuevoCliente = async (req,res, next) => {
         await cliente.save();
         res.json({mensaje: 'Se agrego un nuevo cliente'});
     }catch (error) {
-        console.log(error);
+        res.send(error);
         next();
     }
     
