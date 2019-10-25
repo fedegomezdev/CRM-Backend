@@ -14,4 +14,7 @@ app.use(cors());
 
 app.use('/' , routes());
 
+//carpeta publica
+app.use(express.static('uploads'));
+
 app.listen(4000);
