@@ -1,0 +1,8 @@
+
+exports.registrarUsuario  = () =>{
+
+};
+
+ exports.autenticarUsuario = () => {
+
+ };
