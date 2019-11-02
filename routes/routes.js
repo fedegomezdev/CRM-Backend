@@ -6,12 +6,14 @@ const productosController = require('../controller/productosController');
 const pedidosController = require('../controller/pedidosController');
 const usuariosController= require('../controller/usuariosController');
 
+const auth = require('../middleware/auth');
+
 module.exports = function(){
     
     //CLIENTES
     router.post('/clientes', clienteController.nuevoCliente);
 
-    router.get('/clientes', clienteController.mostrarClientes);
+    router.get('/clientes', auth, clienteController.mostrarClientes);
 
     router.get('/clientes/:idCliente', clienteController.mostrarCliente);
 
