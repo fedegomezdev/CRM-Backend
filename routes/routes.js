@@ -15,42 +15,42 @@ module.exports = function(){
 
     router.get('/clientes', auth, clienteController.mostrarClientes);
 
-    router.get('/clientes/:idCliente', clienteController.mostrarCliente);
+    router.get('/clientes/:idCliente',auth, clienteController.mostrarCliente);
 
-    router.put('/clientes/:idCliente', clienteController.actualizarCliente);
+    router.put('/clientes/:idCliente',auth, clienteController.actualizarCliente);
 
-    router.delete('/clientes/:idCliente', clienteController.eliminarCliente);
+    router.delete('/clientes/:idCliente',auth, clienteController.eliminarCliente);
 
 
 
     //PRODUCTOS
-    router.post('/productos', productosController.subirArchivo , productosController.nuevoProducto);
+    router.post('/productos',auth, productosController.subirArchivo , productosController.nuevoProducto);
 
-    router.get('/productos', productosController.mostrarProductos);
+    router.get('/productos',auth, productosController.mostrarProductos);
 
-    router.get('/productos/:idProducto', productosController.mostrarProducto);
+    router.get('/productos/:idProducto', auth, productosController.mostrarProducto);
 
-    router.put('/productos/:idProducto', productosController.subirArchivo, productosController.actualizarProducto );
+    router.put('/productos/:idProducto',auth, productosController.subirArchivo, productosController.actualizarProducto );
 
-    router.delete('/productos/:idProducto', productosController.eliminarProducto);
+    router.delete('/productos/:idProducto', auth,productosController.eliminarProducto);
 
 
-    router.post('/productos/busqueda/:query', productosController.buscarProducto);
+    router.post('/productos/busqueda/:query',auth, productosController.buscarProducto);
 
     //PEDIDOS
-    router.post('/pedidos/nuevo/:idUsuario', pedidosController.nuevoPedido);
+    router.post('/pedidos/nuevo/:idUsuario',auth, pedidosController.nuevoPedido);
 
-    router.get('/pedidos', pedidosController.mostrarPedidos);
+    router.get('/pedidos',auth, pedidosController.mostrarPedidos);
 
-    router.get('/pedidos/:idPedido', pedidosController.mostrarPedido);
+    router.get('/pedidos/:idPedido', auth, pedidosController.mostrarPedido);
 
-    router.put('/pedidos/:idPedido', pedidosController.actualizarPedido);
+    router.put('/pedidos/:idPedido', auth,pedidosController.actualizarPedido);
 
-    router.delete('/pedidos/:idPedido', pedidosController.eliminarPedido);
+    router.delete('/pedidos/:idPedido',auth, pedidosController.eliminarPedido);
 
 
     //USUARIOS
-    router.post('/crear-cuenta', usuariosController.registrarUsuario );
+    router.post('/crear-cuenta',auth, usuariosController.registrarUsuario );
 
     router.post('/iniciar-sesion', usuariosController.autenticarUsuario);
 
