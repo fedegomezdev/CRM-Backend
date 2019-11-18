@@ -36,7 +36,7 @@ exports.registrarUsuario = async (req, res) => {
                 nombre: usuario.nombre,
                 email:usuario.email,
                 id:usuario._id
-            },'secretkey', {expiresIn:'5h'});
+            },'secretkey', {expiresIn:'8h'});
             //retorno mi token
             res.json({token});
         }
