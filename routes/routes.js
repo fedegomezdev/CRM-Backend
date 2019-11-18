@@ -11,7 +11,7 @@ const auth = require('../middleware/auth');
 module.exports = function(){
     
     //CLIENTES
-    router.post('/clientes', clienteController.nuevoCliente);
+    router.post('/clientes',auth, clienteController.nuevoCliente);
 
     router.get('/clientes', auth, clienteController.mostrarClientes);
 
@@ -35,16 +35,16 @@ module.exports = function(){
     router.delete('/productos/:idProducto', auth,productosController.eliminarProducto);
 
 
-    router.post('/productos/busqueda/:query',auth, productosController.buscarProducto);
+    router.post('/productos/busqueda/:query', productosController.buscarProducto);
 
     //PEDIDOS
     router.post('/pedidos/nuevo/:idUsuario',auth, pedidosController.nuevoPedido);
 
     router.get('/pedidos',auth, pedidosController.mostrarPedidos);
 
-    router.get('/pedidos/:idPedido', auth, pedidosController.mostrarPedido);
+    router.get('/pedidos/:idPedido',auth, pedidosController.mostrarPedido);
 
-    router.put('/pedidos/:idPedido', auth,pedidosController.actualizarPedido);
+    router.put('/pedidos/:idPedido',auth,pedidosController.actualizarPedido);
 
     router.delete('/pedidos/:idPedido',auth, pedidosController.eliminarPedido);
 
